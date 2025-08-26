@@ -1,0 +1,35 @@
+plugins {
+	id 'java'
+	id 'application'
+	id 'org.springframework.boot' version '3.5.4'
+	id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17' // 또는 사용 중인 Java 버전 (예: '21', '22', '24')
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.mariadb.jdbc:mariadb-java-client'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'com.h2database:h2' // 또는 사용하는 DB 드라이버
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+
+
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+// ✅ 경고 제거용 JVM 옵션 추가
+application {
+	mainClass = 'com.example.communityboard.CommunityBoardApplication'
+	applicationDefaultJvmArgs = ['--enable-native-access=ALL-UNNAMED']
+}

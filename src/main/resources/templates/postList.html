@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="'[' + ${categoryLabel} + '] 게시글 목록'">게시글 목록</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f9fafe;
+      font-family: 'Noto Sans KR', sans-serif;
+      padding: 20px;
+    }
+    h2 {
+      border-bottom: 3px solid;
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    .category-personal { border-color: #3f51b5; color: #3f51b5; }
+    .category-travel { border-color: #009688; color: #009688; }
+    .category-idea { border-color: #795548; color: #795548; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 6px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    }
+    thead th {
+      background-color: #f0f0f0;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 2px solid #ddd;
+    }
+    tbody td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
+    tbody tr:hover {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* 카테고리별 배경색 */
+    tbody tr.personal {
+      background-color: #e3e8ff; /* 연한 블루 */
+    }
+    tbody tr.travel {
+      background-color: #d0f0ec; /* 연한 청록 */
+    }
+    tbody tr.idea {
+      background-color: #f0e7db; /* 연한 베이지 */
+    }
+
+    /* 호버시 좀 더 진한 색상 */
+    tbody tr.personal:hover {
+      background-color: #c1d1ff;
+    }
+    tbody tr.travel:hover {
+      background-color: #a0d9d1;
+    }
+    tbody tr.idea:hover {
+      background-color: #d9c7a7;
+    }
+
+    .btn-new-post {
+      float: right;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<a href="/" class="btn btn-light mb-3">
+  <span style="font-size: 18px;">🏠</span> 홈으로
+</a>
+
+<h2 th:class="'category-' + ${category}" th:text="'[' + ${categoryLabel} + '] 게시글 목록'">
+  [카테고리명] 게시글 목록
+</h2>
+
+<a th:href="@{'/posts/new?category=' + ${category}}" class="btn btn-primary btn-new-post">
+  새 글쓰기
+</a>
+
+<table>
+  <thead>
+  <tr>
+    <th>제목</th>
+    <th>작성일</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="post : ${posts}" th:class="${category}">
+    <td>
+      <a th:href="@{'/posts/view/' + ${post.id}}" th:text="${post.title}">게시글 제목</a>
+    </td>
+    <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">작성일</td>
+  </tr>
+  <tr th:if="${#lists.isEmpty(posts)}">
+    <td colspan="2" style="text-align: center; padding: 30px; color: #777;">게시글이 없습니다.</td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
