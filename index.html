@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>성일고등학교 커뮤니티</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #e0efff, #f5f9ff);
+      font-family: 'Noto Sans KR', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 180px;
+    }
+    h1 {
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: #34495e;
+    }
+    .category-cards {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .card {
+      width: 240px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.15s ease-in-out;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+    .card-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+    .btn-container {
+      display: flex;
+      gap: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>성일고등학교 커뮤니티</h1>
+
+<div class="category-cards">
+  <div class="card" onclick="location.href='/posts/category/personal'">
+    <div class="card-icon">👤</div>
+    <h5>개인이야기</h5>
+    <p class="text-muted">학생들의 일상과 경험을 공유해요.</p>
+  </div>
+  <div class="card" onclick="location.href='/posts/category/travel'">
+    <div class="card-icon">✈️</div>
+    <h5>여행후기</h5>
+    <p class="text-muted">여행 경험과 꿀팁을 나눠요.</p>
+  </div>
+  <div class="card" onclick="location.href='/posts/category/idea'">
+    <div class="card-icon">💡</div>
+    <h5>공익 아이디어 제안하기</h5>
+    <p class="text-muted">학교·지역사회를 위한 아이디어를 제안해요.</p>
+  </div>
+</div>
+
+<div class="btn-container">
+  <div th:if="${isLoggedIn}">
+    <span th:text="'안녕하세요, ' + ${username} + '님!'"></span>
+    <button class="btn btn-outline-danger" onclick="location.href='/logout'">로그아웃</button>
+  </div>
+  <div th:if="${!isLoggedIn}">
+    <button class="btn btn-primary" onclick="location.href='/login'">로그인</button>
+    <button class="btn btn-outline-secondary" onclick="location.href='/signup'">회원가입</button>
+  </div>
+</div>
+<!-- 오른쪽 하단 고정 박스 -->
+<div style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(255,255,255,0.9);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-size: 14px;
+    color: #444;
+    max-width: 220px;
+    z-index: 1000;
+    font-family: 'Noto Sans KR', sans-serif;
+">
+  <div style="margin-bottom: 8px;">
+    <strong>성일고등학교 홈페이지</strong><br />
+    <a href="https://sungil-h.goesn.kr/sungil-h/main.do" target="_blank" style="color: #2a66c9; text-decoration: underline;">
+      바로가기 &rarr;
+    </a>
+  </div>
+  <div>
+    <strong>제작팀</strong><br />
+    팀명: 활동하는 컴공<br />
+    팀장: 김태윤<br />
+    팀원: 신진우
+  </div>
+</div>
+
+</body>
+</html>
