@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>로그인 | 커뮤니티 게시판</title>
+  <style>
+    body {
+      background: #f0f2f5;
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-container {
+      background: white;
+      padding: 40px 50px;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      width: 360px;
+      text-align: center;
+    }
+    .login-container h2 {
+      margin-bottom: 25px;
+      color: #333;
+      font-weight: 700;
+    }
+    .login-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.3s border-color;
+    }
+    .login-container input[type="text"]:focus,
+    .login-container input[type="password"]:focus {
+      border-color: #5a9bf6;
+    }
+    .login-container button {
+      margin-top: 10px;
+      padding: 12px 0;
+      border: none;
+      border-radius: 6px;
+      background: #5a9bf6;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s background-color;
+    }
+    .login-container button:hover {
+      background: #3a7dde;
+    }
+    .signup-link {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+    .signup-link a {
+      color: #5a9bf6;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+    .error-message {
+      margin-top: 15px;
+      font-size: 14px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div class="login-container">
+  <h2>로그인</h2>
+
+  <form th:action="@{/login}" method="post">
+    <input type="text" name="username" placeholder="아이디" required />
+    <input type="password" name="password" placeholder="비밀번호" required />
+    <button type="submit">로그인</button>
+  </form>
+
+  <div class="signup-link">
+    계정이 없으신가요? <a th:href="@{/signup}">회원가입</a>
+  </div>
+
+  <div class="error-message" th:if="${param.error}">
+    아이디 또는 비밀번호가 올바르지 않습니다.
+  </div>
+</div>
+</body>
+</html>
